@@ -11,7 +11,7 @@ namespace DS18B20 {
     //% shim=ds18b20::readTemp
     function readTemp(pin: DigitalPin): number {
         // ブラウザのシミュレーター上では常に 25.5℃ (2550) を返す
-        return 2550; 
+        return 2550;
     }
 
     /**
@@ -23,12 +23,12 @@ namespace DS18B20 {
     export function getTemperature(pin: DigitalPin): number {
         // C++側で処理した温度データ（100倍された整数）を取得
         let temp100 = readTemp(pin);
-        
+
         // センサーが見つからない場合のエラーコード処理
         if (temp100 == -8500 || temp100 == -99900) {
             return -999; // エラー時は-999を返す
         }
-        
+
         // 100で割って実際の温度（℃）に戻す
         return temp100 / 100.0;
     }
